@@ -1,0 +1,190 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="GokulInfo.Register" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <style>
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .form-group input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .form-group button {
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        .grid-container {
+            width: 100%;
+            display: flex;
+            justify-content: center; 
+        }
+
+        .gridview-centered {
+            width: 70%; 
+            margin: auto;
+            text-align: center;
+        }
+    </style>
+    <title>GokulInfoCare</title>
+</head>
+
+<body>
+    <h1>Welcome To Gokul-InfoCare</h1>
+    <form id="form1" runat="server">
+        <div class="form-container">
+            <div class="form-group">
+                <asp:Label ID="Label1" runat="server" Text="First Name"></asp:Label>
+                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                    ControlToValidate="TextBox1" ErrorMessage="First Name is required." 
+                    ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+            </div>
+            <div class="form-group">
+                <asp:Label ID="Label2" runat="server" Text="Last Name"></asp:Label>
+                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                    ControlToValidate="TextBox2" ErrorMessage="Last Name is required." 
+                    ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+            </div>
+            <div class="form-group">
+                <asp:Label ID="Label3" runat="server" Text="Phone Number"></asp:Label>
+                <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                    ControlToValidate="TextBox3" ErrorMessage="Phone Number is required." 
+                    ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" 
+                    ControlToValidate="TextBox3" ErrorMessage="Invalid Phone Number." 
+                    ForeColor="Red" Display="Dynamic" 
+                    ValidationExpression="^\d{10}$"></asp:RegularExpressionValidator>
+            </div>
+            <div class="form-group">
+                <asp:Label ID="Label4" runat="server" Text="Email ID"></asp:Label>
+                <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                    ControlToValidate="TextBox4" ErrorMessage="Email ID is required." 
+                    ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" 
+                    ControlToValidate="TextBox4" ErrorMessage="Invalid Email ID." 
+                    ForeColor="Red" Display="Dynamic" 
+                    ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$"></asp:RegularExpressionValidator>
+            </div>
+            <div class="form-group">
+                <asp:Label ID="Label5" runat="server" Text="Address"></asp:Label>
+                <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                    ControlToValidate="TextBox5" ErrorMessage="Address is required." 
+                    ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+            </div>
+            <div class="form-group">
+                <asp:Button ID="Button1" runat="server" Text="Submit" OnClick="Button1_Click" />
+                <asp:Label ID="Label6" runat="server" Text=""></asp:Label> <!-- Ensure this label is only here once -->
+            </div>
+        </div>
+         <div class="grid-container">
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateDeleteButton="True" 
+            AutoGenerateEditButton="True" OnRowCancelingEdit="GridView1_RowCancelingEdit" 
+            DataKeyNames="UserID" OnRowDeleting="GridView1_RowDeleting" 
+            OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" 
+            CssClass="table" CellPadding="4" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False">
+            <AlternatingRowStyle BackColor="White" />
+            <Columns>
+                <asp:TemplateField HeaderText="First Name">
+                    <ItemTemplate>
+                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("FirstName") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FirstName") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
+                            ControlToValidate="TextBox1" ErrorMessage="First Name is required." 
+                            ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Last Name">
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Eval("LastName") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("LastName") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" 
+                            ControlToValidate="TextBox2" ErrorMessage="Last Name is required." 
+                            ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Phone Number">
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Eval("PhoneNumber") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("PhoneNumber") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" 
+                            ControlToValidate="TextBox3" ErrorMessage="Phone Number is required." 
+                            ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" 
+                            ControlToValidate="TextBox3" ErrorMessage="Invalid Phone Number." 
+                            ForeColor="Red" Display="Dynamic" 
+                            ValidationExpression="^\d{10}$"></asp:RegularExpressionValidator>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Email">
+                    <ItemTemplate>
+                        <asp:Label ID="Label4" runat="server" Text='<%# Eval("Email") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Email") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" 
+                            ControlToValidate="TextBox4" ErrorMessage="Email ID is required." 
+                            ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" 
+                            ControlToValidate="TextBox4" ErrorMessage="Invalid Email ID." 
+                            ForeColor="Red" Display="Dynamic" 
+                            ValidationExpression="^[^@\s]+@[^@\s]+\.[^@\s]+$"></asp:RegularExpressionValidator>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Address">
+                    <ItemTemplate>
+                        <asp:Label ID="Label5" runat="server" Text='<%# Eval("Address") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Address") %>'></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" 
+                            ControlToValidate="TextBox5" ErrorMessage="Address is required." 
+                            ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:CommandField ShowEditButton="false" ShowDeleteButton="false" />
+            </Columns>
+            <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+            <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+            <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
+            <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
+            <SortedAscendingCellStyle BackColor="#FDF5AC" />
+            <SortedAscendingHeaderStyle BackColor="#4D0000" />
+            <SortedDescendingCellStyle BackColor="#FCF6C0" />
+            <SortedDescendingHeaderStyle BackColor="#820000" />
+        </asp:GridView>
+             </div>
+    </form>
+</body>
+</html>
